@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        input, select, button {
+            margin: 5px;
+            padding: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<h1>Simple Unit Converter</h1>
+<body>
+<form action="/team-21/unit-converter" method="post">
+    <input type="number" name="value" placeholder="Enter value" step="any" required />
+    <select name="unitType">
+        <option th:value="km-to-mi" th:selected="${unitType == 'km-to-mi'}">Kilometers to Miles</option>
+        <option th:value="mi-to-km" th:selected="${unitType == 'mi-to-km'}">Miles to Kilometers</option>
+        <option th:value="km-to-ff" th:selected="${unitType == 'km-to-ff'}">Kilometers to Football Fields</option>
+        <option th:value="ff-to-km" th:selected="${unitType == 'ff-to-km'}">Football Fields to Kilometers</option>
+    </select>
+    <button type="submit">Convert</button>
+</form>
+<p th:if="${result != null}" th:text="'Result: ' + ${result}"></p>
+</body>
+</html>

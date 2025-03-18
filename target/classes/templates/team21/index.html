@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<title>ExpenseTracker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../../public/team21/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<h1>Welcome <span th:text="${username}">User</span>, to the dashboard!</h1>
+<a href="/logout">Logout</a>
+</body>
+
+<body>
+<div class="container">
+    <h2>Expense Tracker</h2>
+    <form id="expense-form" th:action="@{/addExpense}" method="post">
+        <input type="text" name="expenseName" id="expense-name" placeholder="Expense Name" required />
+        <input type="number" name="amount" id="expense-amount" placeholder="Amount" required />
+        <select name="categoryId" id="expense-category" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="1">Food</option>
+            <option value="2">Transport</option>
+            <option value="3">Entertainment</option>
+            <option value="4">Other</option>
+        </select>
+        <input type="date" name="expenseDate" id="expense-date" required />
+        <button type="submit">Add Expense</button>
+    </form>
+    <div class="expense-table">
+        <table>
+            <thead>
+            <tr>
+                <th>Expense Name</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody id="expense-list">
+            <tr th:each="expense : ${expenseList}">
+                <td th:text="${expense.name}"></td>
+                <td th:text="${expense.amount}"></td>
+                <td th:text="${expense.categoryId}"></td>
+                <td th:text="${#dates.format(expense.dateCreated, 'yyyy-MM-dd')}"></td>
+                <td><button>Delete</button></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="total-amount">
+            <strong>Total:</strong> $<span th:text="${totalAmount}">0</span>
+        </div>
+    </div>
+    <div class="filter">
+        <label for="filter-category">Filter by Category:</label>
+        <select id="filter-category">
+            <option value="All">All</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
