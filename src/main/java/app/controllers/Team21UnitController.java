@@ -7,8 +7,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class Team21UnitController {
     public static void routes(Javalin app) {
-        app.get("/team-21/unit-converter", Team21UnitController::team21FrontHome);
-        app.post("/team-21/unit-converter", Team21UnitController::handleConversion);  // This now matches the form action
+        app.get("/team-21/unit-converter", ctx -> Team21UnitController.team21FrontHome(ctx));
+        app.post("/team-21/unit-converter", ctx -> Team21UnitController.handleConversion(ctx));  // This now matches the form action
     }
 
     private static void team21FrontHome(@NotNull Context ctx) {
